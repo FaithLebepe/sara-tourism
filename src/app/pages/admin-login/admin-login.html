@@ -20,7 +20,7 @@
       <form [formGroup]="form" (ngSubmit)="submit()">
         <div class="field">
           <label>Email</label>
-          <input formControlName="email" type="email" placeholder="admin@saratourism.co.za"
+          <input formControlName="email" type="email"
                  [class.invalid]="form.get('email')?.invalid && form.get('email')?.touched" />
         </div>
         <div class="field">
