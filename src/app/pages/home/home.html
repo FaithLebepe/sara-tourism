@@ -1,0 +1,55 @@
+<app-navbar />
+
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Limpopo, South Africa</div>
+      <h1>Sunrise safaris and <em>authentic</em> Limpopo adventures</h1>
+      <p>Book guided tours, hikes and cultural experiences across Limpopo - all in one place, confirmed instantly.</p>
+      <div class="search-card">
+        <input placeholder="Search activities, e.g. Kruger safari" />
+        <div class="divider"></div>
+        <a routerLink="/activities" class="search-btn">Search</a>
+      </div>
+    </div>
+    <div class="hero-image arch">
+      <div class="sun"></div>
+      <div class="cap">Kruger sunrise safari - departs 06:00 daily</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap section-pad">
+  <div class="section-head">
+    <h2>Popular activities</h2>
+    <a routerLink="/activities">View all activities &rarr;</a>
+  </div>
+
+  <div class="activities-grid">
+    @for (activity of popularActivities(); track activity.activityId) {
+      <a [routerLink]="['/activities', activity.activityId]" class="act-card">
+        @if (activity.imagePath) {
+          <div class="thumb"><img [src]="'http://localhost:8080' + activity.imagePath" alt="" /></div>
+        } @else {
+          <div class="thumb placeholder"></div>
+        }
+        <div class="body">
+          <h3>{{ activity.activityName }}</h3>
+          <div class="meta">{{ activity.location }} &middot; up to {{ activity.maxCapacity }} people</div>
+          <div class="price-row">
+            <span class="price">R {{ activity.pricePerPerson | number:'1.0-0' }} <small>pp</small></span>
+          </div>
+        </div>
+      </a>
+    } @empty {
+      <p class="muted">No activities available yet.</p>
+    }
+  </div>
+</div>
+
+<div class="footer">
+  <div class="wrap">
+    <div><strong>SARA Tourism</strong><br />Promoting Limpopo, one journey at a time.</div>
+    <div>&copy; 2026 SARA Tourism</div>
+  </div>
+</div>

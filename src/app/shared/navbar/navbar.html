@@ -1,0 +1,21 @@
+<div class="topbar">
+  <a routerLink="/" class="brand">
+    <div class="mark"></div>SARA Tourism
+  </a>
+
+  @if (authService.isTourist()) {
+    <div class="site-nav">
+      <a routerLink="/activities" routerLinkActive="current">Activities</a>
+      <a routerLink="/my-bookings" routerLinkActive="current">My bookings</a>
+    </div>
+    <a href="#" class="cta-pill" (click)="logout(); $event.preventDefault()">
+      {{ authService.currentUser()?.name }}
+    </a>
+  } @else {
+    <div class="site-nav">
+      <a routerLink="/activities" routerLinkActive="current">Activities</a>
+      <a routerLink="/login">Log in</a>
+    </div>
+    <a routerLink="/register" class="cta-pill">Register</a>
+  }
+</div>

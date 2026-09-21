@@ -1,0 +1,82 @@
+<div class="auth-shell">
+  <div class="auth-side">
+    <div class="sun"></div>
+    <div class="brand"><div class="mark"></div>SARA Tourism</div>
+    <blockquote>
+      "Watching the sun rise over the bushveld on my first Kruger safari is a memory I'll carry forever."
+      <div class="quote-by">&mdash; Recent SARA Tourism guest</div>
+    </blockquote>
+  </div>
+
+  <div class="auth-form-side">
+    <div class="auth-card">
+      <h1>Create your account</h1>
+      <p class="sub">Join SARA Tourism to book activities across Limpopo.</p>
+
+      @if (serverError()) {
+        <div class="server-error">{{ serverError() }}</div>
+      }
+
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="row2">
+          <div class="field">
+            <label>Name</label>
+            <input formControlName="name" placeholder="Faith"
+                   [class.invalid]="form.get('name')?.invalid && form.get('name')?.touched" />
+            @if (form.get('name')?.invalid && form.get('name')?.touched) {
+              <div class="error">Please enter your name.</div>
+            }
+          </div>
+          <div class="field">
+            <label>Surname</label>
+            <input formControlName="surname" placeholder="Machaka"
+                   [class.invalid]="form.get('surname')?.invalid && form.get('surname')?.touched" />
+            @if (form.get('surname')?.invalid && form.get('surname')?.touched) {
+              <div class="error">Please enter your surname.</div>
+            }
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <input formControlName="email" type="email" placeholder="name@example.com"
+                 [class.invalid]="form.get('email')?.invalid && form.get('email')?.touched" />
+          @if (form.get('email')?.invalid && form.get('email')?.touched) {
+            <div class="error">Please enter a valid email address.</div>
+          }
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label>Password</label>
+            <input formControlName="password" type="password"
+                   [class.invalid]="form.get('password')?.invalid && form.get('password')?.touched" />
+            @if (form.get('password')?.invalid && form.get('password')?.touched) {
+              <div class="error">At least 8 characters.</div>
+            }
+          </div>
+          <div class="field">
+            <label>Confirm password</label>
+            <input formControlName="confirmPassword" type="password"
+                   [class.invalid]="form.errors?.['passwordsMismatch'] && form.get('confirmPassword')?.touched" />
+            @if (form.errors?.['passwordsMismatch'] && form.get('confirmPassword')?.touched) {
+              <div class="error">Passwords do not match.</div>
+            }
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Date of birth</label>
+          <input formControlName="dateOfBirth" type="date"
+                 [class.invalid]="form.get('dateOfBirth')?.invalid && form.get('dateOfBirth')?.touched" />
+        </div>
+
+        <button type="submit" [disabled]="submitting()">
+          {{ submitting() ? 'Creating account...' : 'Create account' }}
+        </button>
+      </form>
+
+      <div class="auth-foot">Already registered? <a routerLink="/login">Log in</a></div>
+    </div>
+  </div>
+</div>

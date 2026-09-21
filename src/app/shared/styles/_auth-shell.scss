@@ -1,0 +1,164 @@
+.auth-shell {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+.auth-side {
+  background: linear-gradient(165deg, #2E5443, #1F3A2E 75%);
+  position: relative;
+  padding: 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+
+  .sun {
+    position: absolute;
+    top: 64px;
+    right: 64px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--gold-light);
+    opacity: 0.85;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Fraunces', serif;
+    font-size: 21px;
+    font-weight: 600;
+
+    .mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 50% 50% 4px 4px;
+      background: var(--gold);
+      position: relative;
+      overflow: hidden;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0; right: 0; bottom: 0;
+        height: 55%;
+        background: var(--forest);
+        border-radius: 0 0 4px 4px;
+      }
+    }
+  }
+
+  blockquote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.4;
+    max-width: 360px;
+    margin: 0;
+
+    .quote-by {
+      font-size: 12.5px;
+      color: #cfd9ce;
+      margin-top: 14px;
+      font-style: normal;
+    }
+  }
+}
+
+.auth-form-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 52px;
+  background: #fff;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 360px;
+
+  h1 { font-size: 26px; margin-bottom: 6px; }
+
+  .sub { color: var(--muted); font-size: 13.5px; margin-bottom: 24px; }
+
+  .field {
+    margin-bottom: 14px;
+
+    label {
+      display: block;
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid #e4ddcd;
+      background: #fbf9f4;
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: 'Manrope';
+      outline: none;
+
+      &.invalid { border-color: #A33; }
+    }
+
+    .error {
+      font-size: 11.5px;
+      color: #A33;
+      margin-top: 4px;
+    }
+  }
+
+  .row2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .server-error {
+    background: #f4d9d9;
+    color: #8a2c2c;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+
+  .server-success {
+    background: #EAF0E7;
+    color: #3E5C46;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    background: var(--clay);
+    color: #fff;
+    border: none;
+    padding: 13px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 6px;
+
+    &:disabled { opacity: 0.6; cursor: not-allowed; }
+  }
+
+  .auth-foot {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 18px;
+    text-align: center;
+
+    a { color: var(--clay); font-weight: 700; text-decoration: none; }
+  }
+}

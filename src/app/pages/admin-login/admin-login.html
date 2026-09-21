@@ -1,0 +1,39 @@
+<div class="auth-shell">
+  <div class="auth-side">
+    <div class="sun"></div>
+    <div class="brand"><div class="mark"></div>SARA Admin</div>
+    <blockquote>
+      "Manage bookings, guides and activities from one place."
+      <div class="quote-by">&mdash; SARA Tourism</div>
+    </blockquote>
+  </div>
+
+  <div class="auth-form-side">
+    <div class="auth-card">
+      <h1>Admin log in</h1>
+      <p class="sub">For SARA Tourism staff only.</p>
+
+      @if (serverError()) {
+        <div class="server-error">{{ serverError() }}</div>
+      }
+
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="field">
+          <label>Email</label>
+          <input formControlName="email" type="email" placeholder="admin@saratourism.co.za"
+                 [class.invalid]="form.get('email')?.invalid && form.get('email')?.touched" />
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input formControlName="password" type="password"
+                 [class.invalid]="form.get('password')?.invalid && form.get('password')?.touched" />
+        </div>
+        <button type="submit" [disabled]="submitting()">
+          {{ submitting() ? 'Logging in...' : 'Log in' }}
+        </button>
+      </form>
+
+      <div class="auth-foot"><a routerLink="/login" style="color:var(--muted);">Tourist log in instead</a></div>
+    </div>
+  </div>
+</div>

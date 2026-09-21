@@ -1,1 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap');
+
+:root {
+  --forest: #1F3A2E;
+  --forest-light: #2E5443;
+  --gold: #C99A3E;
+  --gold-light: #E7C878;
+  --clay: #A6532B;
+  --cream: #F7F3E8;
+  --card: #FFFFFF;
+  --charcoal: #2B2620;
+  --muted: #7A7166;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--cream);
+  color: var(--charcoal);
+  font-family: 'Manrope', sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  margin: 0;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

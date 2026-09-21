@@ -1,0 +1,34 @@
+<app-navbar />
+
+<div class="wrap">
+  <div class="page-title-row">
+    <h1>All activities</h1>
+    <span>{{ activities().length }} activities available</span>
+  </div>
+
+  <form class="filter-bar" (ngSubmit)="load()">
+    <input [(ngModel)]="searchTerm" name="q" placeholder="Search activities, e.g. Kruger safari" />
+    <button type="submit" class="search-btn">Search</button>
+  </form>
+
+  <div class="activities-grid">
+    @for (activity of activities(); track activity.activityId) {
+      <a [routerLink]="['/activities', activity.activityId]" class="act-card">
+        @if (activity.imagePath) {
+          <div class="thumb"><img [src]="'http://localhost:8080' + activity.imagePath" alt="" /></div>
+        } @else {
+          <div class="thumb placeholder"></div>
+        }
+        <div class="body">
+          <h3>{{ activity.activityName }}</h3>
+          <div class="meta">{{ activity.location }} &middot; up to {{ activity.maxCapacity }} people</div>
+          <div class="price-row">
+            <span class="price">R {{ activity.pricePerPerson | number:'1.0-0' }} <small>pp</small></span>
+          </div>
+        </div>
+      </a>
+    } @empty {
+      <p class="muted">No activities match your search.</p>
+    }
+  </div>
+</div>

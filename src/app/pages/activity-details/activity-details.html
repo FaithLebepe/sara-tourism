@@ -1,0 +1,80 @@
+<app-navbar />
+
+@if (activity(); as a) {
+  <div class="wrap booking-layout">
+    <div class="detail-card">
+      @if (a.imagePath) {
+        <div class="detail-image"><img [src]="'http://localhost:8080' + a.imagePath" alt="" /></div>
+      } @else {
+        <div class="detail-image placeholder"></div>
+      }
+
+      <h1>{{ a.activityName }}</h1>
+      <div class="detail-meta">
+        <span>{{ a.location }}</span>
+        <span>{{ a.durationMinutes }} min</span>
+        <span>Up to {{ a.maxCapacity }} people</span>
+        @if (reviews().length > 0) {
+          <span class="rating">&#9733; {{ averageRating }} ({{ reviews().length }} review{{ reviews().length === 1 ? '' : 's' }})</span>
+        }
+      </div>
+      <p class="desc">{{ a.description }}</p>
+
+      <h2 class="reviews-title">Reviews</h2>
+      @if (reviews().length === 0) {
+        <p class="muted">No reviews yet for this activity.</p>
+      } @else {
+        @for (review of reviews(); track review.reviewid) {
+          <div class="review-row">
+            <div class="review-header">
+              <strong>{{ review.touristname }} {{ review.touristsurname }}</strong>
+              <span class="stars">
+                @for (star of [1,2,3,4,5]; track star) {
+                  <span [class.filled]="star <= review.rating">&#9733;</span>
+                }
+              </span>
+            </div>
+            @if (review.comment) {
+              <p class="review-comment">{{ review.comment }}</p>
+            }
+            <span class="review-date">{{ review.reviewdate | date:'dd MMM yyyy' }}</span>
+          </div>
+        }
+      }
+    </div>
+
+    <div class="booking-panel">
+      <h2>Book this activity</h2>
+
+      @if (bookingError()) {
+        <div class="server-error">{{ bookingError() }}</div>
+      }
+
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="field">
+          <label>Date</label>
+          <input formControlName="bookingDate" type="date" />
+          <div class="hint">Only future dates are selectable</div>
+        </div>
+        <div class="field">
+          <label>Number of people</label>
+          <input formControlName="numberOfPeople" type="number" min="1" />
+          <div class="hint">Maximum {{ a.maxCapacity }} people for this activity</div>
+        </div>
+        <div class="field">
+          <label>Contact email</label>
+          <input formControlName="contactEmail" type="email" placeholder="name@example.com" />
+        </div>
+
+        <div class="total-row">
+          <span>Estimated total</span>
+          <strong>R {{ estimatedTotal | number:'1.2-2' }}</strong>
+        </div>
+
+        <button type="submit" class="primary-btn" [disabled]="submitting()">
+          {{ submitting() ? 'Booking...' : 'Confirm booking' }}
+        </button>
+      </form>
+    </div>
+  </div>
+}
