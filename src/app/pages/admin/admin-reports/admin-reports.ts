@@ -1,13 +1,12 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { DatePipe, DecimalPipe } from '@angular/common';
+import { Component, OnInit, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AdminSidebar } from '../../../shared/admin-sidebar/admin-sidebar';
 import { AdminReportService, ReportData } from '../../../core/services/admin-report';
-import { DatePipe, DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-admin-reports',
   imports: [AdminSidebar, FormsModule, DatePipe, DecimalPipe],
-  standalone: true,
   templateUrl: './admin-reports.html',
   styleUrl: './admin-reports.scss',
 })
@@ -15,6 +14,25 @@ export class AdminReports implements OnInit {
   report = signal<ReportData | null>(null);
   startDate: string;
   endDate: string;
+
+  // Client-side filters - instant, no extra API call, since the date-range
+  // data is already loaded in full.
+  guideFilter = signal('');
+  activityFilter = signal('');
+
+  filteredToursPerGuide = computed(() => {
+    const term = this.guideFilter().toLowerCase();
+    const list = this.report()?.toursPerGuide ?? [];
+    if (!term) return list;
+    return list.filter(row => row.guidename.toLowerCase().includes(term));
+  });
+
+  filteredRevenuePerActivity = computed(() => {
+    const term = this.activityFilter().toLowerCase();
+    const list = this.report()?.revenuePerActivity ?? [];
+    if (!term) return list;
+    return list.filter(row => row.activityname.toLowerCase().includes(term));
+  });
 
   constructor(private adminReportService: AdminReportService) {
     const today = new Date();

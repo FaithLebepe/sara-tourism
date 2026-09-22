@@ -17,11 +17,16 @@
         <div class="stat-card"><div class="num">R {{ totalRevenue | number:'1.0-0' }}</div><div class="label">Revenue</div></div>
       </div>
 
-      <h2>Tours per guide</h2>
+      <div class="table-header-row">
+        <h2>Tours per guide</h2>
+        <input class="table-filter" [ngModel]="guideFilter()" (ngModelChange)="guideFilter.set($event)" placeholder="Filter by guide name..." />
+      </div>
       <table class="admin-table">
         <tr><th>Guide</th><th>Number of tours</th></tr>
-        @for (row of r.toursPerGuide; track row.tourguideid) {
+        @for (row of filteredToursPerGuide(); track row.tourguideid) {
           <tr><td>{{ row.guidename }}</td><td>{{ row.numberoftours }}</td></tr>
+        } @empty {
+          <tr><td colspan="2" class="muted">No matching guides.</td></tr>
         }
       </table>
 
@@ -33,11 +38,16 @@
         }
       </table>
 
-      <h2>Revenue per activity</h2>
+      <div class="table-header-row">
+        <h2>Revenue per activity</h2>
+        <input class="table-filter" [ngModel]="activityFilter()" (ngModelChange)="activityFilter.set($event)" placeholder="Filter by activity name..." />
+      </div>
       <table class="admin-table">
         <tr><th>Activity</th><th>Bookings</th><th>Revenue</th></tr>
-        @for (row of r.revenuePerActivity; track row.activityid) {
+        @for (row of filteredRevenuePerActivity(); track row.activityid) {
           <tr><td>{{ row.activityname }}</td><td>{{ row.numberofbookings }}</td><td>R {{ row.totalrevenue | number:'1.2-2' }}</td></tr>
+        } @empty {
+          <tr><td colspan="3" class="muted">No matching activities.</td></tr>
         }
       </table>
     }

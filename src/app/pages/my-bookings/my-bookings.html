@@ -10,7 +10,11 @@
   @for (booking of bookings(); track booking.bookingid) {
     <div class="booking-row" [class.cancelled]="booking.bookingstatus === 'Cancelled'">
       <div class="info">
-        <div class="thumb"></div>
+        @if (booking.imagepath) {
+          <div class="thumb"><img [src]="'http://localhost:8080' + booking.imagepath" alt="" /></div>
+        } @else {
+          <div class="thumb placeholder"></div>
+        }
         <div>
           <strong>{{ booking.activityname }}</strong>
           <span>{{ booking.bookingdate | date:'dd MMM yyyy' }} &middot; {{ booking.numberofpeople }} person(s)</span>
@@ -22,7 +26,7 @@
       @if (booking.bookingstatus === 'Completed') {
         <a href="#" class="link-btn" (click)="openReviewModal(booking.bookingid); $event.preventDefault()">Leave a review</a>
       } @else {
-        <span class="link-btn muted">View details</span>
+        <!-- <span class="link-btn muted">View details</span> -->
       }
     </div>
   }

@@ -81,3 +81,8 @@ h1 { font-size: 26px; margin-bottom: 20px; }
   border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer;
   &:disabled { opacity: 0.6; cursor: not-allowed; }
 }
+
+.thumb {
+  &.placeholder { background: linear-gradient(150deg, #7C9473, #2E5443); }
+  img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+}

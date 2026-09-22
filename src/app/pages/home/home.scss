@@ -83,20 +83,15 @@ h1 {
 
 .hero-image {
   height: 400px;
-  background: linear-gradient(160deg, #4a7a5f, #1F3A2E 70%);
+  width: 100%;
   position: relative;
-  border-radius: 220px 220px 18px 18px;
+  //border-radius: 220px 220px 18px 18px;
   overflow: hidden;
 
-  .sun {
-    position: absolute;
-    top: 60px;
-    right: 60px;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background: var(--gold-light);
-    opacity: 0.9;
+  img {
+    width: 100%;
+    height: 100%;
+    //object-fit: cover;
   }
 
   .cap {
@@ -167,3 +162,4 @@ h1 {
   .wrap { display: flex; justify-content: space-between; }
   strong { color: #fff; }
 }
+

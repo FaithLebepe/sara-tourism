@@ -2,6 +2,9 @@
   <div class="auth-side">
     <div class="sun"></div>
     <div class="brand"><div class="mark"></div>SARA Tourism</div>
+    <div class="hero-image">
+      <img src="/Picture8.png" alt="Sunrise safari game drive in Kruger National Park" />
+    </div>
     <blockquote>
       "Watching the sun rise over the bushveld on my first Kruger safari is a memory I'll carry forever."
       <div class="quote-by">&mdash; Recent SARA Tourism guest</div>
@@ -21,7 +24,7 @@
         <div class="row2">
           <div class="field">
             <label>Name</label>
-            <input formControlName="name" placeholder="Faith"
+            <input formControlName="name" 
                    [class.invalid]="form.get('name')?.invalid && form.get('name')?.touched" />
             @if (form.get('name')?.invalid && form.get('name')?.touched) {
               <div class="error">Please enter your name.</div>
@@ -29,7 +32,7 @@
           </div>
           <div class="field">
             <label>Surname</label>
-            <input formControlName="surname" placeholder="Machaka"
+            <input formControlName="surname" 
                    [class.invalid]="form.get('surname')?.invalid && form.get('surname')?.touched" />
             @if (form.get('surname')?.invalid && form.get('surname')?.touched) {
               <div class="error">Please enter your surname.</div>
@@ -39,7 +42,7 @@
 
         <div class="field">
           <label>Email</label>
-          <input formControlName="email" type="email" placeholder="name@example.com"
+          <input formControlName="email" type="email" 
                  [class.invalid]="form.get('email')?.invalid && form.get('email')?.touched" />
           @if (form.get('email')?.invalid && form.get('email')?.touched) {
             <div class="error">Please enter a valid email address.</div>

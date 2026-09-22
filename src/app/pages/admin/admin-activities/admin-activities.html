@@ -9,18 +9,18 @@
 
     <table class="admin-table">
       <tr><th>Activity</th><th>Location</th><th>Price pp</th><th>Bookings</th><th></th></tr>
-      @for (a of activities(); track a.activityId) {
-        <tr>
-          <td>{{ a.activityName }}</td>
-          <td>{{ a.location }}</td>
-          <td>R {{ a.pricePerPerson | number:'1.0-0' }}</td>
-          <td>{{ a.timesbooked || 0 }}</td>
-          <td>
-            <a href="#" class="icon-btn" (click)="openEditForm(a); $event.preventDefault()">Edit</a>
-            <a href="#" class="icon-btn danger" (click)="deleteActivity(a.activityId); $event.preventDefault()">Remove</a>
-          </td>
-        </tr>
-      }
+      @for (a of activities(); track a.activityid) {
+  <tr>
+    <td>{{ a.activityname }}</td>
+    <td>{{ a.location }}</td>
+    <td>R {{ a.priceperperson | number:'1.0-0' }}</td>
+    <td>{{ a.timesbooked || 0 }}</td>
+    <td>
+      <a href="#" class="icon-btn" (click)="openEditForm(a); $event.preventDefault()">Edit</a>
+      <a href="#" class="icon-btn danger" (click)="deleteActivity(a.activityid); $event.preventDefault()">Remove</a>
+    </td>
+  </tr>
+}
     </table>
   </div>
 </div>

@@ -37,6 +37,7 @@ export interface Booking {
   guidename?: string;
   touristname?: string;
   touristsurname?: string;
+  imagepath?: string | null;
 }
 
 export interface TourGuide {
@@ -61,4 +62,17 @@ export interface AuthResponse {
   role: 'TOURIST' | 'ADMIN';
   userId: number;
   name: string;
+}
+
+export interface ActivityWithPopularity {
+  activityid: number;
+  activityname: string;
+  description: string | null;
+  imagepath: string | null;
+  location: string;
+  durationminutes: number;
+  priceperperson: number;
+  maxcapacity: number;
+  isactive: boolean;
+  timesbooked: number;
 }
