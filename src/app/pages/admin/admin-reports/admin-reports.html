@@ -1,1 +1,45 @@
-<p>admin-reports works!</p>
+<div class="admin-shell">
+  <app-admin-sidebar />
+
+  <div class="admin-main">
+    <h1>Reports</h1>
+
+    <div class="filters-row">
+      <input type="date" [(ngModel)]="startDate" />
+      <input type="date" [(ngModel)]="endDate" />
+      <button class="primary-btn" (click)="generate()">Generate</button>
+    </div>
+
+    @if (report(); as r) {
+      <div class="stat-cards">
+        <div class="stat-card"><div class="num">{{ totalTours }}</div><div class="label">Total tours</div></div>
+        <div class="stat-card"><div class="num">{{ averageRating }}</div><div class="label">Average rating</div></div>
+        <div class="stat-card"><div class="num">R {{ totalRevenue | number:'1.0-0' }}</div><div class="label">Revenue</div></div>
+      </div>
+
+      <h2>Tours per guide</h2>
+      <table class="admin-table">
+        <tr><th>Guide</th><th>Number of tours</th></tr>
+        @for (row of r.toursPerGuide; track row.tourguideid) {
+          <tr><td>{{ row.guidename }}</td><td>{{ row.numberoftours }}</td></tr>
+        }
+      </table>
+
+      <h2>Average reviews per week</h2>
+      <table class="admin-table">
+        <tr><th>Week starting</th><th>Average rating</th><th>Reviews</th></tr>
+        @for (row of r.avgReviewsPerWeek; track row.yearweek) {
+          <tr><td>{{ row.weekstarting | date:'dd MMM yyyy' }}</td><td>{{ row.averagerating }}</td><td>{{ row.numberofreviews }}</td></tr>
+        }
+      </table>
+
+      <h2>Revenue per activity</h2>
+      <table class="admin-table">
+        <tr><th>Activity</th><th>Bookings</th><th>Revenue</th></tr>
+        @for (row of r.revenuePerActivity; track row.activityid) {
+          <tr><td>{{ row.activityname }}</td><td>{{ row.numberofbookings }}</td><td>R {{ row.totalrevenue | number:'1.2-2' }}</td></tr>
+        }
+      </table>
+    }
+  </div>
+</div>

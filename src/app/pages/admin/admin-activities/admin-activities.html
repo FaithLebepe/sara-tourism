@@ -1,0 +1,59 @@
+<div class="admin-shell">
+  <app-admin-sidebar />
+
+  <div class="admin-main">
+    <div class="admin-toolbar">
+      <h1>Activities</h1>
+      <button class="btn-solid" (click)="openAddForm()">+ Add activity</button>
+    </div>
+
+    <table class="admin-table">
+      <tr><th>Activity</th><th>Location</th><th>Price pp</th><th>Bookings</th><th></th></tr>
+      @for (a of activities(); track a.activityId) {
+        <tr>
+          <td>{{ a.activityName }}</td>
+          <td>{{ a.location }}</td>
+          <td>R {{ a.pricePerPerson | number:'1.0-0' }}</td>
+          <td>{{ a.timesbooked || 0 }}</td>
+          <td>
+            <a href="#" class="icon-btn" (click)="openEditForm(a); $event.preventDefault()">Edit</a>
+            <a href="#" class="icon-btn danger" (click)="deleteActivity(a.activityId); $event.preventDefault()">Remove</a>
+          </td>
+        </tr>
+      }
+    </table>
+  </div>
+</div>
+
+@if (formOpen()) {
+  <div class="modal-backdrop" (click)="closeForm()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <h2>{{ editingId ? 'Edit activity' : 'Add activity' }}</h2>
+
+      @if (formError()) {
+        <div class="server-error">{{ formError() }}</div>
+      }
+
+      <div class="field">
+        <label>Activity photo</label>
+        <input type="file" accept=".jpg,.jpeg,.png" (change)="onFileSelected($event)" />
+        @if (editingId && !selectedFile) {
+          <div class="hint">Leave empty to keep the current photo</div>
+        }
+      </div>
+      <div class="field"><label>Activity name</label><input [(ngModel)]="model.activityName" /></div>
+      <div class="field"><label>Location</label><input [(ngModel)]="model.location" /></div>
+      <div class="row2">
+        <div class="field"><label>Duration (minutes)</label><input type="number" [(ngModel)]="model.durationMinutes" /></div>
+        <div class="field"><label>Price per person (R)</label><input type="number" [(ngModel)]="model.pricePerPerson" /></div>
+      </div>
+      <div class="field"><label>Max capacity</label><input type="number" [(ngModel)]="model.maxCapacity" /></div>
+      <div class="field"><label>Description</label><textarea [(ngModel)]="model.description" rows="3"></textarea></div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" (click)="closeForm()">Cancel</button>
+        <button type="button" class="primary-btn" (click)="save()">Save activity</button>
+      </div>
+    </div>
+  </div>
+}

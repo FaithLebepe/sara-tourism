@@ -1,0 +1,40 @@
+.admin-shell { display: flex; min-height: 100vh; }
+.admin-main { flex: 1; padding: 36px 44px; background: #f4efe2; }
+
+.admin-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+h1 { font-size: 24px; }
+
+.btn-solid {
+  background: var(--clay); color: #fff; border: none; padding: 9px 18px;
+  border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer;
+}
+
+.admin-table {
+  width: 100%; background: #fff; border-radius: 12px; border-collapse: separate;
+  border-spacing: 0; overflow: hidden; box-shadow: 0 6px 18px rgba(43,38,32,0.06);
+  th { text-align: left; font-size: 12px; color: var(--muted); background: #f4efe2; padding: 12px 16px; font-weight: 700; }
+  td { padding: 13px 16px; font-size: 13.5px; border-top: 1px solid #f0ebdd; }
+}
+
+.icon-btn { color: var(--clay); font-weight: 700; font-size: 12.5px; text-decoration: none; margin-right: 12px; &.danger { color: #A33; } }
+
+.modal-backdrop { position: fixed; inset: 0; background: rgba(43,38,32,0.45); z-index: 200; display: flex; align-items: center; justify-content: center; overflow-y: auto; padding: 40px 0; }
+.modal-box { background: #fff; border-radius: 16px; padding: 26px; width: 100%; max-width: 480px; h2 { font-size: 16px; margin-bottom: 14px; } }
+
+.server-error { background: #f4d9d9; color: #8a2c2c; border-radius: 10px; padding: 10px 14px; font-size: 13px; margin-bottom: 14px; }
+
+.field {
+  margin-bottom: 14px;
+  label { display: block; font-size: 12.5px; color: var(--muted); margin-bottom: 6px; }
+  input, textarea {
+    width: 100%; border: 1.5px solid #e4ddcd; background: #fbf9f4; border-radius: 10px;
+    padding: 10px 12px; font-size: 14px; font-family: 'Manrope'; outline: none;
+  }
+  .hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
+}
+
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.btn-outline { background: transparent; border: 1.5px solid var(--forest); color: var(--forest); padding: 9px 16px; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; }
+.primary-btn { background: var(--clay); color: #fff; border: none; padding: 9px 18px; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; }

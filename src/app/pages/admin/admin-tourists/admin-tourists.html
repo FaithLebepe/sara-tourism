@@ -1,1 +1,24 @@
-<p>admin-tourists works!</p>
+<div class="admin-shell">
+  <app-admin-sidebar />
+
+  <div class="admin-main">
+    <h1>Tourists</h1>
+
+    <table class="admin-table">
+      <tr><th>Name</th><th>Email</th><th>Registered</th><th>Status</th><th></th></tr>
+      @for (t of tourists(); track t.touristId) {
+        <tr>
+          <td>{{ t.name }} {{ t.surname }}</td>
+          <td>{{ t.email }}</td>
+          <td>{{ t.createdDate | date:'dd MMM yyyy' }}</td>
+          <td><span class="pill" [class]="t.isActive ? 'active' : 'inactive'">{{ t.isActive ? 'Active' : 'Inactive' }}</span></td>
+          <td>
+            @if (t.isActive) {
+              <a href="#" class="icon-btn danger" (click)="deactivate(t.touristId); $event.preventDefault()">Deactivate</a>
+            }
+          </td>
+        </tr>
+      }
+    </table>
+  </div>
+</div>

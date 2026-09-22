@@ -8,7 +8,7 @@ import { Activities } from './pages/activities/activities';
 import { ActivityDetails } from './pages/activity-details/activity-details';
 import { MyBookings } from './pages/my-bookings/my-bookings';
 import { AdminBookings } from './pages/admin/admin-bookings/admin-bookings';
-import { AdminActivity } from './pages/admin/admin-activity/admin-activity';
+import { AdminActivities } from './pages/admin/admin-activities/admin-activities';
 import { AdminTourguides } from './pages/admin/admin-tourguides/admin-tourguides';
 import { AdminTourists } from './pages/admin/admin-tourists/admin-tourists';
 import { AdminReports } from './pages/admin/admin-reports/admin-reports';
@@ -28,7 +28,7 @@ export const routes: Routes = [
   { path: 'my-bookings', component: MyBookings, canActivate: [touristGuard] },
 
   { path: 'admin/bookings', component: AdminBookings, canActivate: [adminGuard] },
-  { path: 'admin/activities', component: AdminActivity, canActivate: [adminGuard] },
+  { path: 'admin/activities', component: AdminActivities, canActivate: [adminGuard] },
   { path: 'admin/tourguides', component: AdminTourguides, canActivate: [adminGuard] },
   { path: 'admin/tourists', component: AdminTourists, canActivate: [adminGuard] },
   { path: 'admin/reports', component: AdminReports, canActivate: [adminGuard] },

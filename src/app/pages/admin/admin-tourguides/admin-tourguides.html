@@ -1,1 +1,52 @@
-<p>admin-tourguides works!</p>
+<div class="admin-shell">
+  <app-admin-sidebar />
+
+  <div class="admin-main">
+    <div class="admin-toolbar">
+      <h1>Tour guides</h1>
+      <button class="btn-solid" (click)="openAddForm()">+ Add tour guide</button>
+    </div>
+
+    <table class="admin-table">
+      <tr><th>Name</th><th>Specialization</th><th></th></tr>
+      @for (g of guides(); track g.tourGuideId) {
+        <tr>
+          <td>{{ g.name }}</td>
+          <td>{{ g.specialization }}</td>
+          <td>
+            <a href="#" class="icon-btn" (click)="openEditForm(g); $event.preventDefault()">Edit</a>
+            <a href="#" class="icon-btn danger" (click)="deleteGuide(g.tourGuideId); $event.preventDefault()">Remove</a>
+          </td>
+        </tr>
+      }
+    </table>
+  </div>
+</div>
+
+@if (formOpen()) {
+  <div class="modal-backdrop" (click)="closeForm()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <h2>{{ editingId ? 'Edit tour guide' : 'Add tour guide' }}</h2>
+
+      @if (formError()) {
+        <div class="server-error">{{ formError() }}</div>
+      }
+
+      <div class="field"><label>Name</label><input [(ngModel)]="model.name" placeholder="e.g. Thandiwe Nkosi" /></div>
+      <div class="field">
+        <label>Specialization</label>
+        <select [(ngModel)]="model.specialization">
+          <option>Wildlife tours</option>
+          <option>Cultural heritage tours</option>
+          <option>Adventure & hiking tours</option>
+          <option>Scenic tours</option>
+        </select>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" (click)="closeForm()">Cancel</button>
+        <button type="button" class="primary-btn" (click)="save()">Save tour guide</button>
+      </div>
+    </div>
+  </div>
+}
