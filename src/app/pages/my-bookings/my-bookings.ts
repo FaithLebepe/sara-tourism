@@ -1,9 +1,10 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Navbar } from '../../shared/navbar/navbar';
 import { BookingService } from '../../core/services/booking';
-import { Booking } from '../../core/models';
+import { Activity, Booking } from '../../core/models';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { ActivityService } from '../../core/services/activity';
 
 @Component({
   selector: 'app-my-bookings',
@@ -13,6 +14,8 @@ import { DatePipe } from '@angular/common';
 })
 export class MyBookings implements OnInit {
   bookings = signal<Booking[]>([]);
+  activities = signal<Activity[]>([]);
+    searchTerm = '';
 
   // Review modal state
   reviewModalOpen = signal(false);
@@ -22,7 +25,9 @@ export class MyBookings implements OnInit {
   reviewError = signal<string | null>(null);
   submittingReview = signal(false);
 
-  constructor(private bookingService: BookingService) {}
+  constructor(private bookingService: BookingService,
+    private activityService: ActivityService
+  ) {}
 
   ngOnInit() {
     this.load();
@@ -30,6 +35,8 @@ export class MyBookings implements OnInit {
 
   load() {
     this.bookingService.myBookings().subscribe(b => this.bookings.set(b));
+    this.activityService.list(this.searchTerm || undefined).subscribe(a => this.activities.set(a));
+  
   }
 
   openReviewModal(bookingId: number) {
